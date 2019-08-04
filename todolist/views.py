@@ -16,8 +16,9 @@ def index(request):
 def addTodo(request):
     form = TodoForm(request.POST)
     if form.is_valid():
-        new_todo = Todo(text=request.POST['text'])
-        new_todo.save()
+        # new_todo = Todo(text=form.cleaned_data['text'])
+        # new_todo.save()
+        form.save()
     return redirect('index')
 
 
@@ -33,6 +34,7 @@ def deletecompleted(request):
     Todo.objects.filter(complete__exact=True).delete()
 
     return redirect('index')
+
 
 def deleteall(request):
     Todo.objects.all().delete()
